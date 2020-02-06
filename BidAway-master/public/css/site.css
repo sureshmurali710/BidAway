@@ -1,0 +1,171 @@
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+.cat-item {
+    display: inline-block;
+    border: 1px solid gray;
+    padding: 0.2em;
+}
+
+.cat-item-starttime {
+    font-size: 0.9rem;
+}
+
+.cat-item-img {
+    text-align: center;
+}
+
+.cat-name {
+    margin-bottom: 0px;
+}
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+  .btn-group button {
+    display: inline;
+    background-color: #4CAF50; /* Green background */
+    border: 1px solid green; /* Green border */
+    color: white; /* White text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    float: left; /* Float the buttons side by side */
+  }
+  
+  /* Clear floats (clearfix hack) */
+  .btn-group:after {
+    content: "";
+    clear: both;
+    display: inline;
+  }
+  
+  .btn-group button:not(:last-child) {
+    border-right: none; /* Prevent double borders */
+  }
+  
+  /* Add a background color on hover */
+  .btn-group button:hover {
+    background-color: #3e8e41;
+  }
+
+  .login-form{
+    height: 250px;
+    width: 50%;
+    
+    
+  }
+
+  .new-post{
+    padding-left: 200px;
+  }
+  .newuser-form{
+    padding-right:700px ;
+    padding-left: 200px;
+
+  }
+
+  header{
+    margin-bottom: 25px;
+  }
+
+  .user_name{
+    font-size:14px;
+    font-weight: bold;
+}
+.comments-list .media{
+    border-bottom: 1px dotted #ccc;
+}
+
+.comment-header{
+  border-bottom: 2.5px solid rgb(255, 255, 255);
+}
+
+.btn{
+  font-size: medium;
+  margin: 5px;
+  /* background-color: #0072ee; */
+}
+
+.btn-primary {
+  background-color: #0072ee;
+}
+
+.navbar-brand{
+  font-size: 30px;
+}
+
+.alert{
+  margin-right: 700px;
+
+}
+
+#editbutton{
+  margin-left: 700px;
+}
+
+.nav-link{
+  color:#0072ee ;
+}
+
+.bid-disabled{
+  background-color: #33252b !important;
+  
+}
+
+.ratebutton-disabled{
+  background-color: #202020 !important;
+  color: #ffffff !important;
+}
+
+.rate-item{
+  color: #ffffff !important;
+
+}
+
+.f-item-btn{
+  background-color: #111111 !important
+}
+
+.comment-disabled{
+  background-color:#003064 !important;
+}

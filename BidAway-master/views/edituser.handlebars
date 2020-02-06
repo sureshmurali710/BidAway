@@ -1,0 +1,50 @@
+<article class="newuser-form">
+  <h1>Edit your Info</h1>
+  {{#if hasErrors}}
+  <ul class="error-list">
+    {{#each errors}}
+    <li>
+      {{this}}
+    </li>
+    {{/each}}
+  </ul>
+  {{/if}}
+  <form action="/users/edituser?_method=put" method="POST">
+  <div class="form-group">
+    
+      <label for="validationServer01">Username:</label>
+      <input type="text" name="username" placeholder="username more than six characters" value="{{userinfo.username}}" class="form-control" id="validationServer01" >
+      
+   
+    <br>
+  </div>
+    <div class="form-group">
+    
+      <label for="validationServer02">Phone Number:</label>
+      <input type="number" name="phone_num" placeholder="XXXXXXXXXX" value="{{userinfo.phone_num}}" class="form-control" id="validationServer02" >
+      
+    
+    </div>
+    
+    <div class="form-group">
+      <label for="validationServer03">Email ID:</label>
+      <input type="text" name="emailid"  placeholder="a****@xxx.com"  value="{{userinfo.emailid}}"  class="form-control" id="validationServer03">
+      
+    </div>
+   
+    
+  
+
+     <div class="form-group">
+      <label for="validationServer05">DOB :</label>
+      <input type="date" name="DOB" value="{{userinfo.DOB}}" class="form-control" id="validationServer05">
+      
+    </div>
+    
+ 
+  <button class="btn btn-primary" type="submit">Submit form</button>
+</form>
+
+</article>
+
+

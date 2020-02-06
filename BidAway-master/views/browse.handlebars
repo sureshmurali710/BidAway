@@ -1,0 +1,20 @@
+
+{{#each items}}
+<section class="cat">
+    <h3 class="cat-name">{{@key}}</h3>
+    <div class="cat-item-list">
+    {{#each this}}
+        <div class="cat-item" id="{{this._id}}">
+                <div class="cat-item-name">{{this.name}}</div>
+            <div class="cat-item-img">
+                <img src="https://via.placeholder.com/150">
+            </div>
+            <div class="cat-item-details">
+                <div class="cat-item-price">${{this.startPrice}}</div>
+                <div class="cat-item-price">Starts at {{this.startTime}}</div>
+            </div>
+        </div>
+    {{/each}}
+    </div>
+</section>
+{{/each}}

@@ -1,0 +1,37 @@
+{
+  "name": "bidaway",
+  "version": "1.0.0",
+  "description": "A bidding application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "seed": "node tasks/bidsSeed.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kishanhj/BidAway.git"
+  },
+  "author": "Group 6",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kishanhj/BidAway/issues"
+  },
+  "homepage": "https://github.com/kishanhj/BidAway#readme",
+  "dependencies": {
+    "date-input-polyfill": "^2.14.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.6",
+    "express-handlebars": "^3.1.0",
+    "express-session": "^1.17.0",
+    "handlebars": "^4.5.1",
+    "method-override": "^3.0.0",
+    "mongo": "^0.1.0",
+    "nodemon": "^1.19.4",
+    "passport": "^0.4.0",
+    "password-hash": "^1.2.2",
+    "socket.io": "^2.3.0",
+    "uuid": "^3.3.3",
+    "xss": "^1.0.6"
+  }
+}

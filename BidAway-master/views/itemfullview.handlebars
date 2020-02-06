@@ -1,0 +1,235 @@
+<!-- Remove Item Modal HTML -->
+{{#if showRemove }}
+<div class="modal fade" id="removeItemModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="modal-title" id="staticBackdropLabel">Remove Item</span>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          Are you sure you want to delete this item?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button id="rm-item-btn" type="button" class="btn btn-primary" data-id="{{{item._id}}}">Remove</button>
+      </div>
+    </div>
+  </div>
+</div>
+{{/if}}
+
+<script> 
+    const bidCounters = {} ;
+</script>
+ <script src = "/socket.io/socket.io.js"></script>
+ <script>
+        var socket = io();
+        socket.on('broadcast',function(data){
+        const st = "t_"+data.id;
+        const tf = document.getElementById(st);
+        if(tf)
+            tf.value = data.price;
+        if(bidCounters[data.id]){
+           var fu = bidCounters[data.id];
+           fu(new Date(data.et));
+        }
+        var table = document.getElementById('table1');
+        if(table.rows.length > 9)
+        table.deleteRow(9);
+        var new_row = table.insertRow(0);
+        new_row.classList.add("f-item-bid");
+        new_row.insertCell(0).classList.add("f-bid-price");
+        new_row.insertCell(1).classList.add("f-bid-user");
+        new_row.insertCell(2).classList.add("f-bid-time");
+        new_row.cells[0].innerHTML = data.bid.price;
+        new_row.cells[1].innerHTML = data.bid.user;
+        new_row.cells[2].innerHTML = data.bid.time;
+        });
+</script>
+<script>
+    function onBid(id,bidUserId){
+        if("{{user_id}}" === bidUserId){
+            alert("Cannot bid on item you posted");
+            return;
+        }
+        var socket = io();
+        var pricey = document.getElementById("t_"+id).value;
+        var price = parseFloat(pricey);
+        price += 0.1;
+        price = price.toFixed(2);
+        const bid = {
+            id : id,
+            price : price,
+            user_id : "{{user_id}}"
+        }
+        socket.emit("bidEvent",bid);
+    }
+</script>
+<section class="f-item">
+    {{#if showRemove }}
+        {{#if item.removed}}
+        <div class="f-item-remove">
+            <span class="text-danger">This item has been removed</span>
+        </div>
+        {{else}}
+            <div class="f-item-remove">
+                <button class="btn btn-danger" data-toggle="modal" data-target="#removeItemModal">Remove Item</button>
+            </div>
+        {{/if}}
+    {{else}}
+        {{#if item.removed}}
+        <div class="f-item-removed">
+            <span class="text-danger">This item has been removed</span>
+        </div>
+        {{/if}}
+    {{/if}}
+    <br><br>
+
+    {{#if showItem }}
+    {{#if isowner}}
+    <div> <a class="btn btn-primary btn-sm" href="/item/edititem/{{ itemid }}" id="editbutton"> Edit Item</a></div>
+    {{/if}}
+    <div class="f-item-img">
+        <img width="250" height="250" src="/{{{item.image}}}" alt="Image of item {{{item.name}}}">
+    </div>
+    <div class="f-item-details">
+        <div class="f-item-name">{{{item.name}}}</div>
+        <div class="f-item-seller">User :{{{ item.userid.name }}}</div>
+        <div class="f-item-seller">Rating : {{{ item.userid.ratings }}}</div>
+        <div id="{{itemForBid._id}}"></div>
+        <div class="f-item-bids">
+            <table id="table1" class="f-item-bids-tbl">
+                <tbody>
+                    {{#each itemForBid.bids}}
+                    <tr class="f-item-bid">
+                        <td class="f-bid-price">{{price}}</td>
+                        <td class="f-bid-user">{{user}}</td>
+                        <td class="f-bid-time">{{time}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            <div class="f-item-btn-cont">
+            <input class="tf-num pricetf" style="display: none" value="{{itemForBid.current_price}}" id="t_{{itemForBid._id}}" type="number" disabled>
+            {{#if isloggedin }}
+            <button id="b_{{itemForBid._id}}" title="Adds 10 cents" class="btn btn-primary f-item-btn" onclick="onBid('{{itemForBid._id}}','{{item.userid.id}}')">Bid</button>
+            {{else}}
+            <a class="btn btn-primary" href="/users/userlogin">Login &amp; Start Bidding</a>
+            {{/if}}
+            </div>
+        </div>
+        
+            <script>
+                var countDownDate_{{itemForBid._id}} = new Date("{{itemForBid.ending_time}}").getTime();
+
+                bidCounters["{{itemForBid._id}}"] = function addtime_{{itemForBid._id}}(et){  
+                    countDownDate_{{itemForBid._id}} = et;
+                    document.getElementById("{{itemForBid._id}}").style.backgroundColor = "yellow";
+                    setInterval(function(){
+                        document.getElementById("{{itemForBid._id}}").style.backgroundColor = null;
+                    },1000);
+                };
+                var x_{{itemForBid._id}} = setInterval(function() {
+                var now = new Date().getTime();
+                var distance = countDownDate_{{itemForBid._id}} - now;
+
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                if(hours < 10) hours = "0"+hours;
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                if(minutes < 10) minutes = "0"+minutes;
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                if(seconds < 10) seconds = "0"+seconds;
+    
+                document.getElementById("{{itemForBid._id}}").innerHTML = hours + " : "
+                + minutes + " : " + seconds;
+    
+                if (distance < 0) {
+                clearInterval(x_{{itemForBid._id}});
+                var btn = document.getElementById("b_{{itemForBid._id}}");
+                btn.classList.replace("btn-primary","btn-danger");
+                btn.disabled = true;
+                btn.title = "Expired";
+                document.getElementById("{{itemForBid._id}}").innerHTML = "EXPIRED";
+                }
+                }, 1000); 
+             </script>
+    </div>
+    <div class="f-item-desc">
+        <div class="f-item-desc-title">Description</div>
+        <div class="f-item-desc-text">
+            {{{item.description}}}
+        </div>
+    </div>
+    
+    <div class="container">
+        
+        <div class="row" id="ratings">
+            {{#if userhasrated}}
+            <div><p>your rating for the item: {{ userrating }} </p></div>
+            {{else}}
+            <p>you have not yet rated</p>
+            {{/if}}
+         <div class="input-group mb-3">
+             
+             <form class="form-inline"   id="new-ratings">
+            <select class="custom-select" name="itemratings" id="ratinginputGroupSelect">
+                 
+                 <option value="1">1</option>
+                 <option value="2">2</option>
+                 <option value="3">3</option>
+                 <option value="4">4</option>
+                 <option value="5">5</option>
+             </select>
+            <div class="input-group-append">
+                {{#if isloggedin }}
+                    {{#if isowner}}
+                        <button class="btn btn-outline-secondary ratebutton-disabled" type="submit" disabled>owner can't rate Rate Item</button>
+                     {{else}}   
+                        <button class="btn btn-primary rate-item" type="submit">Rate Item</button>
+                    {{/if}}
+                 {{else}}
+                         <button class="btn btn-outline-secondary ratebutton-disabled" type="submit" disabled>log in to Rate Item</button>
+                  {{/if}}
+            </div>
+            </form>
+        </div>
+        <script>
+            document.getElementById("ratinginputGroupSelect").value = "{{userrating}}";
+        </script>
+        
+    </div>
+    <div class="row" id="comments">
+    
+    <div class="comments-list" id="todo-area">
+         <h1 class="comment-header">Comments</h1>
+        {{#each item.comments }}
+        {{>comment_data isUserAdmin=../isUserAdmin}}
+        {{/each}}
+    </div>
+    </div>
+    
+    <div class="col-sm-12 col-md-4">
+        <form id="new-item-form">
+            <label>Comment: <textarea id="new-task-description"></textarea></label>
+             {{#if isloggedin }}
+            <button class="btn btn-primary" type="submit">Add Comment</button>
+            {{else}}
+            <button class="btn btn-primary comment-disabled" disabled> Add comment </button>
+            {{/if}}
+            
+        </form>
+    </div>
+   
+    {{/if}}
+     
+    </div>
+    
+</section>
+
+
+<link rel="stylesheet" href="/public/css/item.css">
+
+

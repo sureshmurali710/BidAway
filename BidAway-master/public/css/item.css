@@ -1,0 +1,91 @@
+
+.f-item {
+    margin: 0 auto;
+    width: 800px;
+    margin-top: 2em;
+}
+
+.f-item-name {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.f-item-seller {
+    font-size: 0.9em;
+    color: #2c2c2c;
+}
+
+.f-item-bid:nth-child(1) {
+    font-size: 1.2rem;
+}
+
+.f-item-bids {
+    width: 100%;
+    margin-top: 1em;
+    font-size: 0.9rem;
+}
+
+.f-bid-user {
+    padding-left: 0.5rem;
+    width: 60%;
+}
+
+.f-item-btn-cont {
+    text-align: center;
+}
+
+.f-item-btn {
+    width: 70%;
+}
+
+.f-bid-price {
+    width: 3em;
+    text-align: right;
+}
+
+.f-item-bids-tbl {
+    margin-bottom: 1em;
+    width: 100%;
+}
+
+.f-item-bids-tbl td {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.f-item-bids {
+    width: 100%;
+}
+
+.f-item-img {
+    display: inline-block;
+}
+
+.f-item-desc, .f-item-comm-cont {
+    margin-top: 1em;
+}
+
+.f-item-desc-title, .f-item-comm-title {
+    font-size: 1.2em;
+    font-weight: light;
+}
+
+.f-item-details {
+    width: 60%;
+    margin-left: 1em;
+    vertical-align: top;
+    display: inline-block;
+}
+
+.f-item-remove {
+    float: right;
+}
+
+.f-item-removed {
+    text-align: center;
+}
+
+#ratings{
+   
+    float: right;
+}

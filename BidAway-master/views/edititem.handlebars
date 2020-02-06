@@ -1,0 +1,40 @@
+<article class="new-post">
+  <h1>Edit the item</h1>
+  {{#if hasErrors}}
+  
+    {{#each errors}}
+    <div class="alert alert-danger" role="alert">
+ {{this}}
+</div>
+    
+    {{/each}}
+ 
+  {{/if}}
+  <form action="/item/edititem/{{ itemid }}?_method=put" method="POST" class="new-post-form">
+    <label>
+     Item Name
+      <input type="text" name="item_title" placeholder="item name" value="{{itemForBid.name}}" class="full-width-input"/>
+    </label>
+    
+    
+    
+    <br>
+    <label>
+      Description
+      <input type="text" size=40 name="description"  placeholder="Item Description"  value="{{itemForBid.description}}" class="full-width-input"/>
+    </label>
+    <br>
+  
+       
+    
+
+ 
+    <button type="submit">Submit</button>
+
+
+ 
+    
+  </form>
+
+ 
+</article>

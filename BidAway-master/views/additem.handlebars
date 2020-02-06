@@ -1,0 +1,88 @@
+<article class="new-post">
+  <h1>Make a Item!</h1>
+  {{#if hasErrors}}
+  
+    {{#each errors}}
+    <div class="alert alert-danger" role="alert">
+ {{this}}
+</div>
+    
+    {{/each}}
+ 
+  {{/if}}
+  <form action="/bids" method="POST" class="new-post-form" enctype="multipart/form-data">
+    <label>
+     Item Name:
+      <input type="text" name="item_title" placeholder="item name" value="{{itemForBid.item_title}}" class="full-width-input"/>
+    </label>
+    
+    
+    <br>
+   <label>Upload an image:
+       <input name="itemImage" type="file" id="takePictureField" accept="image/*" />
+   </label>
+       <!--
+<script type="text/javascript">
+window.uploadPhotos = function(url){
+  var formData = new FormData();
+
+  
+  var fileInputElement = document.getElementById("takePictureField");
+  formData.append("userfile", fileInputElement.files[0]);
+
+ 
+  var content = '<a id="a"><b id="b">hey!</b></a>'; 
+  var blob = new Blob([content], { type: "text/xml"});
+  formData.append("webmasterfile", blob);
+
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", url);
+  xhr.send(formData);
+}
+</script>
+-->
+
+<br>
+    <fieldset>
+          <legend>Categories</legend>
+          <p>
+             <label>Select list</label>
+             <select id = "category-of-interest" name="category" >
+               <option value = "Electronics" selected>Electronics</option>
+               <option value = "Furniture">Furniture</option>
+               <option value = "Automobile">Automobile</option>
+             </select>
+          </p>
+       </fieldset>
+       <script>
+            document.getElementById("category-of-interest").value = {{ category }};
+        </script>
+    <br>
+    <label>
+      Description
+      <input type="text" size=40 name="description"  placeholder="Item Description"  value="{{itemForBid.description}}" class="full-width-input"/>
+    </label>
+    <br>
+    <label>
+      Time Period (in Minutes)
+      <input type="number" name="time_period"  placeholder="" min="5" value="{{itemForBid.time_period}}" class="full-width-input" step="5"/>
+    </label>
+    <br>
+    <label>
+      Starting price ($)
+      <input type="number" name="starting_price" placeholder="00.00"   value="{{itemForBid.starting_price}}" class="full-width-input"/>
+    </label>
+    <br>
+       
+    
+
+ 
+    <button type="submit">Submit</button>
+
+
+ 
+    
+  </form>
+
+ 
+</article>
